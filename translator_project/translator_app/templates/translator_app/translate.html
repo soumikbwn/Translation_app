@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Translator</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'translator_app/css/styles.css' %}">
+</head>
+<body>
+    <h1>Translate a Word</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="source_text">Word to Translate:</label>
+        <input type="text" id="source_text" name="source_text" value="{{ source_text }}">
+        <label for="target_language">Target Language:</label>
+        <select id="target_language" name="target_language">
+            <option value="en" {% if target_language == "en" %}selected{% endif %}>English</option>
+            <option value="es" {% if target_language == "es" %}selected{% endif %}>Spanish</option>
+            <option value="fr" {% if target_language == "fr" %}selected{% endif %}>French</option>
+            <option value="de" {% if target_language == "de" %}selected{% endif %}>German</option>
+            <option value="zh-cn" {% if target_language == "zh-cn" %}selected{% endif %}>Chinese (Simplified)</option>
+            <option value="bn" {% if target_language == "bn" %}selected{% endif %}>Bengali</option>
+            <option value="kn" {% if target_language == "kn" %}selected{% endif %}>Kannada</option>
+            <option value="te" {% if target_language == "te" %}selected{% endif %}>Telugu</option>
+            <option value="ml" {% if target_language == "ml" %}selected{% endif %}>Malayalam</option>
+            <option value="or" {% if target_language == "or" %}selected{% endif %}>Odia</option>
+            <option value="mr" {% if target_language == "mr" %}selected{% endif %}>Marathi</option>
+            <option value="hi" {% if target_language == "hi" %}selected{% endif %}>Hindi</option>
+        </select>
+        <button type="submit">Translate</button>
+    </form>
+
+    {% if translated_text %}
+    <h2>Translated Text:</h2>
+    <p>{{ translated_text }}</p>
+    {% endif %}
+</body>
+</html>
